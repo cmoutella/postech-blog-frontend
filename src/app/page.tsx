@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+// Essa é a home e deverá conter uma listagem de posts
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

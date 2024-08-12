@@ -1,0 +1,8 @@
+{
+  "label": "The App",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Essa documentação irá abordar sobre temas técnicos da aplicação, como setup inicial, infra, rotas e demais informações técnicas necessárias para pleno entendimento de seu funcionamento."
+  }
+}

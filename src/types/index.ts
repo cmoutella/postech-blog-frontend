@@ -1,12 +1,15 @@
-export interface Author {
+export interface Teacher {
+  id: string;
   name: string;
   age: number;
 }
 
+export type SessionTeacher = Teacher | undefined;
+
 export interface Post {
   id: string;
   text: string;
-  author: Author;
+  teacher: Teacher;
   createdAt: Date;
   updatedAt?: Date;
 }

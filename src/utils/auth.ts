@@ -10,10 +10,10 @@ export interface UserResponse {
 
 export function getUserFn(): Teacher | undefined {
   const currAuth: TeacherAuth = getToken();
-  const userId = currAuth.userId;
+  if (!currAuth || !currAuth.userId) return undefined;
 
-  if (!userId) return undefined;
   // TODO: request /users/:id
+  const userId = currAuth.userId;
 
   const mockedResponse: Teacher = {
     id: "123",

@@ -1,12 +1,32 @@
 ---
 sidebar_position: 2
+title: "Rodando a aplicação localmente"
 ---
 
-# Rodando a aplicação
+Para que a aplicação funcione corretamente, é necessário ter o ambiente de frontend e backend rodando localmente.
 
-Para subir localmente a aplicação podemos usar duas abordagens:
 
-1. Acessar a API deployada, isto é, apontar para usa URL para consumir os dados do banco.
-2. Acessar a API localmente. Para esta opção é necessário que o ambiente de backend esteja disponível localmente.
+## 1. O frontend
+Para rodar localmente o ambiente frontend rode no terminal o comando:
 
-Para optar entre as abordagens é necessário possuir um arquivo .env contendo a base url do endpoint do qual se deseja consumir.
+```
+npm start
+```
+
+## 2. O backend
+A melhor forma de consumir o backend localmente é através do container do docker da api.
+
+Para baixar e rodar a última versão da api use o comando:
+
+```
+docker run -d --name postech-blog-api -p 8080:3000 cmoutella/school-blog-api
+```
+
+Dessa forma a api estará disponível na porta 8080.
+
+## 3. Integração do Frontend com o Backend
+
+Para que a integração ocorra corretamente é necessário possui o arquivo `.env` com os valores apropriados seguindo o modelo do arquivo `.env.example`.
+
+Para o valor `BASE_URL` defina a url `http://localhost:8080`, para acessar o api na porta 8080.
+Para acessar a documentação da api, acesse /api.

@@ -1,5 +1,7 @@
-// TODO
-// Essa página deverá executar a autenticação do usuário
+import LoginView from "@/views/login";
 
-// Como guardar a informação de que o usuário está autenticado?
-// Devolver o token com tymestamp? Ideia: deslogar o usuário após X tempo
+const LoginPage = () => {
+  return <LoginView />;
+};
+
+export default LoginPage;

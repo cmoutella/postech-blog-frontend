@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-// Essa é a home e deverá conter uma listagem de posts
+// Deve importar o conteúdo client da home em /views/home
 
 export default function Home() {
   return (

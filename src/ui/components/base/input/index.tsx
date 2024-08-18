@@ -13,7 +13,7 @@ interface BaseInputProps {
   required?: boolean;
   styling?: BaseInputStyleProps;
   iconButton?: ReactElement;
-  type: string;
+  type?: string;
 }
 
 const defaultStylingProps: BaseInputStyleProps = {
@@ -29,7 +29,7 @@ const Input = ({
   styling = defaultStylingProps,
   onChange,
   iconButton,
-  type,
+  type = "text",
 }: BaseInputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;

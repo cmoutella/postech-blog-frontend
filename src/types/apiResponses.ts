@@ -1,8 +1,3 @@
-export interface APIResponse<T> {
-  timestamp: Date;
-  data: T;
-}
-
 export interface SuccessResponse<T> {
   timestamp: Date;
   data: T;

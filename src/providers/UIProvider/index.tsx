@@ -2,7 +2,7 @@
 import { createContext, useContext, useState } from "react";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
-import { Loading } from "@/components/loading";
+import { Loading } from "@/ui/components/loading";
 
 type InterfaceAction = () => void;
 

@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import { Teacher } from "@/types";
-import { TeacherAuth } from "@/types/apiRequests";
+import { TeacherAuth } from "@/types/apiResponses";
 import { getToken, setToken } from "@/utils/storage";
+import { isBefore } from "date-fns";
 
 export interface UserResponse {
   appToken: string;
@@ -27,9 +28,14 @@ export function getUserFn(): Teacher | undefined {
 export async function handleUserResponse(loginAuth?: TeacherAuth) {
   const currAuth = getToken();
 
-  const auth = currAuth ?? loginAuth;
+  const auth = loginAuth ?? currAuth;
 
-  if (!auth) {
+  const authExpiration = new Date(auth.expireAt);
+  const now = new Date();
+
+  const authIsValid = authExpiration && isBefore(now, authExpiration);
+
+  if (!auth && !authIsValid) {
     throw new Error("Não foi possivel confirmar suas credenciais");
   }
 

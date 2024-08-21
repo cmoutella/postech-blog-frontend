@@ -3,7 +3,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 import { useRouter } from "next/navigation";
 import { SessionTeacher, Teacher } from "@/types";
-import { TeacherAuth } from "@/types/apiRequests";
+import { TeacherAuth } from "@/types/apiResponses";
 import storage from "@/utils/storage";
 import { getUserFn, handleUserResponse } from "@/utils/auth";
 import { authLogin } from "@/features/auth/login";

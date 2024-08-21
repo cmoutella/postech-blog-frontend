@@ -1,5 +1,5 @@
 import { authCookie, authCookieOptions } from "@/config/constants/cookies";
-import { TeacherAuth } from "@/types/apiRequests";
+import { TeacherAuth } from "@/types/apiResponses";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 
 export const getToken = () => {

@@ -2,7 +2,7 @@
 
 import { Teacher } from "@/types";
 import { TeacherAuth } from "@/types/apiResponses";
-import { getToken, setToken } from "@/utils/storage";
+import { getToken, setToken } from "@/services/storage";
 import { isBefore } from "date-fns";
 
 export interface UserResponse {

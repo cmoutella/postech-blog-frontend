@@ -4,8 +4,8 @@ import { createContext, useContext, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SessionTeacher, Teacher } from "@/types";
 import { TeacherAuth } from "@/types/apiResponses";
-import storage from "@/utils/storage";
-import { getUserFn, handleUserResponse } from "@/utils/auth";
+import storage from "@/services/storage";
+import { getUserFn, handleUserResponse } from "@/services/auth";
 import { authLogin } from "@/features/auth/login";
 
 interface SessionContext {
@@ -51,6 +51,8 @@ export const SessionProvider = ({
     if (!auth) return;
 
     const authUser = await handleUserResponse(auth);
+
+    console.log(authUser);
 
     setUser(authUser);
   };

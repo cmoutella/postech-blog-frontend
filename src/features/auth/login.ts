@@ -21,15 +21,13 @@ export const authLogin: (
         "Content-Type": "application/json",
       },
       body: JSON.stringify(credentials),
-    });
+    }).then((res) => res.json());
 
-    const res = await auth.json();
-
-    if (res.error) {
+    if (auth.error) {
       throw Error("Não foi possivel completar atualizar suas credenciais");
     }
 
-    const { data } = res as SuccessResponse<TeacherAuth>;
+    const { data } = auth as SuccessResponse<TeacherAuth>;
 
     return data;
   } catch (err) {

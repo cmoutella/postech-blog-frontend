@@ -17,7 +17,7 @@ interface SessionContext {
 }
 
 const DEFAULT_VALUES = {
-  user: undefined,
+  user: (storage.getToken() && { id: storage.getToken().userId }) ?? undefined,
   isLogged: storage.hasToken(),
   login: (u: string, p: string) => {},
   logout: () => {},
@@ -42,7 +42,7 @@ export const SessionProvider = ({
   children: React.ReactNode;
 }) => {
   const [user, setUser] = useState<SessionTeacher>(DEFAULT_VALUES.user);
-  // const router = useRouter();
+  const router = useRouter();
 
   const handleSessionInit = async () => {
     const user = await getUserFn();
@@ -58,13 +58,15 @@ export const SessionProvider = ({
     const auth = await authLogin(username, password);
     if (!auth) return;
 
-    const authUser = await handleUserResponse(auth);
-
-    setUser(authUser);
+    await handleUserResponse(auth).then((res) => {
+      setUser(res);
+      router.push("/");
+    });
   };
 
   const logout = () => {
     setUser(undefined);
+    storage.clearToken();
   };
 
   const authenticate = () => {
@@ -80,11 +82,12 @@ export const SessionProvider = ({
         //   message: "Não foi possivel realizar o login tente mais tarde",
         // });
         setTimeout(() => {
-          // redirect to login page
+          router.push("/login");
         }, 3000);
       });
   };
 
+  // TODO: esse nao ta rolando, pq?
   const isLogged = useMemo(
     () => user !== undefined && storage.hasToken(),
     [user]

@@ -3,7 +3,7 @@ export interface Teacher {
   username: string;
 }
 
-export type SessionTeacher = Teacher | undefined;
+export type SessionTeacher = Teacher | Partial<Teacher> | undefined;
 
 export interface Post {
   id: string;

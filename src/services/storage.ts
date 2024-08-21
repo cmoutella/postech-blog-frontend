@@ -2,7 +2,7 @@ import { authCookie, authCookieOptions } from "@/config/constants/cookies";
 import { TeacherAuth } from "@/types/apiResponses";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 
-export const getToken = () => {
+export const getToken: () => TeacherAuth = () => {
   const app = getCookie(authCookie.api);
 
   if (app) {
@@ -21,10 +21,10 @@ export const clearToken = () => {
 };
 
 export const hasToken = () => {
-  const token = getToken();
-  if (!token) return false;
+  const authCookie = getToken();
+  if (!authCookie) return false;
 
-  const app = token.app;
+  const app = authCookie.token;
 
   return !!app;
 };

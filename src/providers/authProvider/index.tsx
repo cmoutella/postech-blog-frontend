@@ -1,8 +1,8 @@
 "use client";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import { useRouter } from "next/navigation";
-import { SessionTeacher, Teacher } from "@/types";
+import { SessionTeacher } from "@/types";
 import { TeacherAuth } from "@/types/apiResponses";
 import storage from "@/services/storage";
 import { getUserFn, handleUserResponse } from "@/services/auth";
@@ -16,10 +16,8 @@ interface SessionContext {
   logout: () => void;
 }
 
-const user = getUserFn();
-
 const DEFAULT_VALUES = {
-  user: (user as Teacher) ?? undefined,
+  user: undefined,
   isLogged: storage.hasToken(),
   login: (u: string, p: string) => {},
   logout: () => {},
@@ -46,13 +44,21 @@ export const SessionProvider = ({
   const [user, setUser] = useState<SessionTeacher>(DEFAULT_VALUES.user);
   // const router = useRouter();
 
+  const handleSessionInit = async () => {
+    const user = await getUserFn();
+
+    setUser(user);
+  };
+
+  useEffect(() => {
+    handleSessionInit();
+  }, []);
+
   const login = async (username: string, password: string) => {
     const auth = await authLogin(username, password);
     if (!auth) return;
 
     const authUser = await handleUserResponse(auth);
-
-    console.log(authUser);
 
     setUser(authUser);
   };
@@ -80,7 +86,7 @@ export const SessionProvider = ({
   };
 
   const isLogged = useMemo(
-    () => user != undefined && storage.hasToken(),
+    () => user !== undefined && storage.hasToken(),
     [user]
   );
 

@@ -1,7 +1,6 @@
 export interface Teacher {
   id: string;
-  name: string;
-  age: number;
+  username: string;
 }
 
 export type SessionTeacher = Teacher | undefined;

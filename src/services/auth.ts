@@ -2,47 +2,46 @@
 
 import { Teacher } from "@/types";
 import { TeacherAuth } from "@/types/apiResponses";
-import { getToken, setToken } from "@/services/storage";
+import { clearToken, getToken, setToken } from "@/services/storage";
 import { isBefore } from "date-fns";
+import { getUserRequest } from "@/features/user/getUserRequest";
 
 export interface UserResponse {
   appToken: string;
 }
 
-export function getUserFn(): Teacher | undefined {
+export async function getUserFn(): Promise<Teacher | undefined> {
   const currAuth: TeacherAuth = getToken();
   if (!currAuth || !currAuth.userId) return undefined;
 
-  // TODO: request /users/:id
-  const userId = currAuth.userId;
+  const teacher = await getUserRequest(currAuth.userId, currAuth.token);
 
-  const mockedResponse: Teacher = {
-    id: "123",
-    age: 28,
-    name: "Dumbledore",
-  };
-
-  return mockedResponse;
+  return teacher;
 }
 
 export async function handleUserResponse(loginAuth?: TeacherAuth) {
-  const currAuth = getToken();
+  const currAuth: TeacherAuth = getToken();
 
-  const auth = loginAuth ?? currAuth;
+  const auth: TeacherAuth = loginAuth ?? currAuth;
+
+  if (!auth) {
+    clearToken();
+    throw new Error("Não foi possivel confirmar suas credenciais");
+  }
 
   const authExpiration = new Date(auth.expireAt);
   const now = new Date();
 
   const authIsValid = authExpiration && isBefore(now, authExpiration);
 
-  if (!auth && !authIsValid) {
+  if (!authIsValid) {
+    clearToken();
     throw new Error("Não foi possivel confirmar suas credenciais");
   }
 
-  // TODO: handle expiration
   setToken(auth);
 
-  const user = getUserFn() as Teacher;
+  const user = (await getUserFn()) as Teacher;
 
   return user;
 }

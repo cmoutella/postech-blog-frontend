@@ -1,5 +1,5 @@
 export interface TeacherAuth {
   token: string;
-  expiration: string;
+  expireAt: string;
   userId: string;
 }

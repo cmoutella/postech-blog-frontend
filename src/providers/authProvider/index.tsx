@@ -44,11 +44,10 @@ export const SessionProvider = ({
   children: React.ReactNode;
 }) => {
   const [user, setUser] = useState<SessionTeacher>(DEFAULT_VALUES.user);
-  const router = useRouter();
+  // const router = useRouter();
 
   const login = async (username: string, password: string) => {
     const auth = await authLogin(username, password);
-
     if (!auth) return;
 
     const authUser = await handleUserResponse(auth);

@@ -1,9 +1,5 @@
-export interface SuccessResponse<T> {
-  timestamp: Date;
-  data: T;
-}
-
-export interface FailedResponse<T> {
-  error: number;
-  message: T;
+export interface TeacherAuth {
+  token: string;
+  expireAt: string;
+  userId: string;
 }

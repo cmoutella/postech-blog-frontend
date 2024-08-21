@@ -1,5 +1,5 @@
-import { TeacherAuth } from "@/types/apiRequests";
-import { SuccessResponse } from "@/types/apiResponses";
+import { TeacherAuth } from "@/types/apiResponses";
+import { SuccessResponse } from "@/types/apiPatterns";
 
 export const authLogin: (
   username: string,

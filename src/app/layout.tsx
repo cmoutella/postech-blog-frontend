@@ -19,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`w-screen h-screen ${inter.className} bg-gray-100`}>
-        <Navbar />
         <div className="w-full">
-          <AllProviders>{children}</AllProviders>
+          <AllProviders>
+            <Navbar />
+            <div className="w-full">{children}</div>
+          </AllProviders>
         </div>
       </body>
     </html>

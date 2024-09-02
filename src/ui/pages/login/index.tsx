@@ -52,7 +52,7 @@ const LoginView = () => {
           className="max-w-xs mb-10"
         />
         
-        <h2 className="text-white text-lg mb-3">Let's post</h2>
+        <h2 className="text-white text-lg mb-3">Lets post</h2>
         <p className="text-white text-shadow text-sm text-shadow-sm text-center md:text-left">
           Behind everything, there's research.
         </p>

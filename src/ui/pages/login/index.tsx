@@ -2,6 +2,9 @@
 import { useSessionContext } from "@/providers/AuthProvider";
 import Input from "@/ui/components/base/input";
 import { FormEvent, useState } from "react";
+import Image from "next/image"; // Importa o componente Image do Next.js
+import { Eye, EyeOff } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const LoginView = () => {
   const [username, setUsername] = useState<string | undefined>(undefined);
@@ -10,7 +13,6 @@ const LoginView = () => {
 
   const { login } = useSessionContext();
 
-  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -27,7 +29,7 @@ const LoginView = () => {
   };
 
   const EyeButton = () => {
-    const eye = passwordVisible ? "XX" : "OO";
+    const eye = passwordVisible ? <EyeOff /> : <Eye />;
 
     return (
       <span
@@ -40,39 +42,53 @@ const LoginView = () => {
   };
 
   return (
-    <div className="w-full h-full px-6 py-10">
-      <div className="container">
-        <div className="flex justify-center">
-          <div className="px-6 py-8 pb-6 bg-slate-800 w-6/12 max-w-xl shadow-md shadow-white">
-            <div
-              className="flex flex-col items-center gap-4 w-full"
-              // onSubmit={handleSubmit}
+    <div className="flex flex-col md:flex-row w-full h-screen">
+      <div className="w-full md:w-1/2 bg-gradient-to-t from-[#870E34] to-[#ED195C] flex flex-col items-center justify-center p-6 md:p-0">
+        <Image
+          src={logo}
+          alt="Logo"
+          width={220}
+          height={220}
+          className="max-w-xs mb-10"
+        />
+        
+        <h2 className="text-white text-lg mb-3">Lets post</h2>
+        <p className="text-white text-shadow text-sm text-shadow-sm text-center md:text-left">
+          Behind everything, there's research.
+        </p>
+      </div>
+
+      {/* Metade com a caixa de login */}
+      <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-10">
+        <div className="p-8 w-full max-w-md">
+          <p className="text-4xl text-[#5DBAB2] mb-5">Get started</p>
+          <div className="flex flex-col items-center gap-4 w-full">
+            <Input
+              label=""
+              inputId="username"
+              value={username ?? ""}
+              onChange={changeUsernameValue}
+              placeholder="Digite seu nome de usuário"
+            />
+            <Input
+              inputId="password"
+              label=""
+              onChange={changePasswordValue}
+              value={password ?? ""}
+              type={passwordVisible ? "text" : "password"}
+              placeholder="Digite sua senha"
+              iconButton={<EyeButton />}
+            />
+            <button
+              className="bg-[#5DBAB2] px-4 py-2 rounded-md text-sm mt-4 self-end text-white"
+              disabled={!password && !username}
+              onClick={handleSubmit}
             >
-              <Input
-                label="Usuário"
-                inputId="username"
-                value={username ?? ""}
-                onChange={changeUsernameValue}
-                placeholder="Digite seu nome de usuário"
-              />
-              <Input
-                inputId="password"
-                label="Senha"
-                onChange={changePasswordValue}
-                value={password ?? ""}
-                type={passwordVisible ? "text" : "password"}
-                placeholder="Digite sua senha"
-                iconButton={<EyeButton />}
-              />
-              <button
-                // type="submit"
-                className="bg-pink-600 px-2 py-1 rounded-md text-sm mt-4 self-end"
-                disabled={!password && !username}
-                onClick={handleSubmit}
-              >
-                Entrar
-              </button>
-            </div>
+              Entrar
+            </button>
+            <a href="#" className="text-[#5dbab2] underline text-sm">
+              Sou aluno
+            </a>
           </div>
         </div>
       </div>

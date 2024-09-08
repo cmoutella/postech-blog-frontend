@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import { useSessionContext } from "@/providers/AuthProvider";
 import Input from "@/ui/components/base/input";
@@ -52,8 +53,8 @@ const LoginView = () => {
           className="max-w-xs mb-10"
         />
         
-        <h2 className="text-white text-lg mb-3">Lets post</h2>
-        <p className="text-white text-shadow text-sm text-shadow-sm text-center md:text-left">
+        <h2 className="text-white text-2xl mb-3 font-thin">Let's post.</h2>
+        <p className="text-white text-opacity-95 text-shadow text-sm text-shadow-sm text-center md:text-left font-sans">
           Behind everything, there's research.
         </p>
       </div>
@@ -61,7 +62,7 @@ const LoginView = () => {
       {/* Metade com a caixa de login */}
       <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-10">
         <div className="p-8 w-full max-w-md">
-          <p className="text-4xl text-[#5DBAB2] mb-5">Get started</p>
+          <p className="text-4xl text-[#5DBAB2] mb-5 font-normal">Get started</p>
           <div className="flex flex-col items-center gap-4 w-full">
             <Input
               label=""
@@ -86,7 +87,7 @@ const LoginView = () => {
             >
               Entrar
             </button>
-            <a href="#" className="text-[#5dbab2] underline text-sm">
+            <a href="#" className="text-[#5dbab2] underline text-sm font-mono">
               Sou aluno
             </a>
           </div>

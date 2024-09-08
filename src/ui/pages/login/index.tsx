@@ -71,6 +71,7 @@ const LoginView = () => {
               onChange={changeUsernameValue}
               placeholder="Digite seu nome de usuário"
             />
+            
             <Input
               inputId="password"
               label=""
@@ -80,6 +81,7 @@ const LoginView = () => {
               placeholder="Digite sua senha"
               iconButton={<EyeButton />}
             />
+
             <button
               className="bg-[#5DBAB2] px-4 py-2 rounded-md text-sm mt-4 self-end text-white"
               disabled={!password && !username}
@@ -87,6 +89,7 @@ const LoginView = () => {
             >
               Entrar
             </button>
+
             <a href="#" className="text-[#5dbab2] underline text-sm font-mono">
               Sou aluno
             </a>

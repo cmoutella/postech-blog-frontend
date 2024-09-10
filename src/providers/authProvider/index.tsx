@@ -7,6 +7,7 @@ import { TeacherAuth } from "@/types/apiResponses";
 import storage from "@/services/storage";
 import { getUserFn, handleUserResponse } from "@/services/auth";
 import { authLogin } from "@/features/auth/login";
+import { isTokenValid } from "@/utils/auth";
 
 interface SessionContext {
   user?: SessionTeacher;
@@ -17,7 +18,7 @@ interface SessionContext {
 }
 
 const DEFAULT_VALUES = {
-  user: (storage.getToken() && { id: storage.getToken().userId }) ?? undefined,
+  user: getUserFn() ?? undefined,
   isLogged: storage.hasToken(),
   login: (u: string, p: string) => {},
   logout: () => {},
@@ -44,16 +45,6 @@ export const SessionProvider = ({
   const [user, setUser] = useState<SessionTeacher>(DEFAULT_VALUES.user);
   const router = useRouter();
 
-  const handleSessionInit = async () => {
-    const user = await getUserFn();
-
-    setUser(user);
-  };
-
-  useEffect(() => {
-    handleSessionInit();
-  }, []);
-
   const login = async (username: string, password: string) => {
     const auth = await authLogin(username, password);
     if (!auth) return;
@@ -69,8 +60,12 @@ export const SessionProvider = ({
     storage.clearToken();
   };
 
-  const authenticate = () => {
+  const authenticate = (auth: TeacherAuth) => {
     if (user) return;
+    if (isTokenValid(auth.expireAt)) {
+      setUser(auth.user);
+      return;
+    }
 
     handleUserResponse()
       .then((user) => {

@@ -12,3 +12,11 @@ export interface Post {
   createdAt: Date;
   updatedAt?: Date;
 }
+
+export interface PostInterface {
+  id: string;
+  title: string;
+  author: string;
+  date: string;
+  text: string;
+}

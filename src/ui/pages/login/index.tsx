@@ -44,7 +44,7 @@ const LoginView = () => {
 
   return (
     <div className="flex flex-col md:flex-row w-full h-screen">
-      <div className="w-full md:w-1/2 bg-gradient-to-t from-[#870E34] to-[#ED195C] flex flex-col items-center justify-center p-6 md:p-0">
+      <div className="w-full md:w-1/2 bg-gradient-to-t from-fiap-dark to-fiap flex flex-col items-center justify-center p-6 md:p-0">
         <Image
           src={logo}
           alt="Logo"
@@ -52,7 +52,7 @@ const LoginView = () => {
           height={220}
           className="max-w-xs mb-10"
         />
-        
+
         <h2 className="text-white text-2xl mb-3 font-thin">Let's post.</h2>
         <p className="text-white text-opacity-95 text-shadow text-sm text-shadow-sm text-center md:text-left font-sans">
           Behind everything, there's research.
@@ -62,7 +62,9 @@ const LoginView = () => {
       {/* Metade com a caixa de login */}
       <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-10">
         <div className="p-8 w-full max-w-md">
-          <p className="text-4xl text-[#5DBAB2] mb-5 font-normal">Get started</p>
+          <p className="text-4xl text-[#5DBAB2] mb-5 font-normal">
+            Get started
+          </p>
           <div className="flex flex-col items-center gap-4 w-full">
             <Input
               label=""
@@ -71,7 +73,7 @@ const LoginView = () => {
               onChange={changeUsernameValue}
               placeholder="Digite seu nome de usuário"
             />
-            
+
             <Input
               inputId="password"
               label=""

@@ -27,7 +27,7 @@ const BlogPublicView = () => {
       <Navbar/>
       <SearchBar/>
       <div className="container mx-auto p-4 flex-col">
-      
+      <p>teste</p>
       {posts.map((post) => (
         <PostPreview post={post} key={post.id} />
       ))}

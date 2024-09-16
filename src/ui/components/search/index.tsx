@@ -27,17 +27,17 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="flex justify-center min-h-screen">
+    <div className="flex justify-center">
       <div className="w-[1090px]">
         <p className='font-bold text-zinc-400 ml-8 mb-5'>What are you looking for?</p>
         <div className="flex items-center space-x-2 relative">
           <Search className="text-black" />
-          <div className="relative w-full">
+          <div className="relative">
             <input
               type="text"
               value={inputValue} // Vinculando o valor do input ao estado
               onChange={handleInputChange} // Detecta a mudança no input
-              className="w-full bg-transparent text-black border-none focus:outline-none"
+              className="bg-transparent text-black font-light text-lg border-none focus:outline-none"
               style={{ caretColor: "black" }} // Mostrar o cursor quando digitar
             />
             {!inputValue && ( // Exibe o placeholder apenas se não houver texto no input

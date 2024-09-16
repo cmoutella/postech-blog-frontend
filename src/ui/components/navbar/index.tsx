@@ -1,19 +1,55 @@
 "use client";
 
-import SessionButton from "../sessionButton";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { LogOut, Menu, MoveLeft } from 'lucide-react';
+import logodark from '@/assets/logo-dark.png';
+import Image from 'next/image';
+import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+
+const MyDropdownMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <DropdownMenu onOpenChange={handleToggle}>
+      <DropdownMenuTrigger>
+        <Menu
+        size={35}
+          strokeWidth={3}
+          className={`text-zinc-900 transition-transform duration-500 focus:outline-none focus:ring-0 ${isOpen ? 'rotate-180' : 'rotate-0'} mr-7`}
+        />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>Option 1</DropdownMenuItem>
+        <DropdownMenuItem>Option 2</DropdownMenuItem>
+        <DropdownMenuItem>Option 3</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <LogOut color="#1E1E1E" className="p-1 rounded-full" /> Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const Navbar = () => {
   return (
-    <div className="w-full px-6 py-3 bg-fiap">
-      <div className="container flex justify-between gap-10 text-white">
-        <div className="flex gap-10">
-          <h1 className="font-bold">Postech Blog</h1>
-          <p>This will be a navbar</p>
+    <div className='flex flex-col h-screen p-0 m-0'>
+      <nav className="w-full flex justify-between items-center p-1">
+        <div className="flex items-center">
+          <a href="#">
+            <Image src={logodark} alt="Logo" className="h-16 w-16 mt-3" />
+          </a>
         </div>
-        <div>
-          <SessionButton />
+        <div className="flex items-center">
+          <MyDropdownMenu />
         </div>
-      </div>
+      </nav>
     </div>
   );
 };

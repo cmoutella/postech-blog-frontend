@@ -2,6 +2,7 @@
 
 import { getAllPosts } from "@/features/posts/getAll";
 import { PostInterface } from "@/types";
+import Navbar from "@/ui/components/navbar";
 import PostPreview from "@/ui/components/postPreview";
 import { useEffect, useState } from "react";
 
@@ -21,11 +22,14 @@ const BlogPublicView = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 flex-col">
-      <h1>HOME</h1>
+    <div className="p-4">
+      <Navbar/>
+      <div className="container mx-auto p-4 flex-col">
+      
       {posts.map((post) => (
         <PostPreview post={post} key={post.id} />
       ))}
+      </div>
     </div>
   );
 };

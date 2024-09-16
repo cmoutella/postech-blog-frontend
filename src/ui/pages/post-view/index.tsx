@@ -1,40 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { LogOut, Menu, MoveLeft } from 'lucide-react';
-import logodark from '@/assets/logo-dark.png';
-import Image from 'next/image';
-import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-
-const MyDropdownMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    // Dropdown Menu: parte da navbar
-    <DropdownMenu onOpenChange={handleToggle}>
-      <DropdownMenuTrigger>
-        <Menu
-        size={35}
-          strokeWidth={3}
-          className={`text-zinc-900 transition-transform duration-500 ${isOpen ? 'rotate-180' : 'rotate-0'} mr-7`}
-        />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem>Option 1</DropdownMenuItem>
-        <DropdownMenuItem>Option 2</DropdownMenuItem>
-        <DropdownMenuItem>Option 3</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <LogOut color="#1E1E1E" className="p-1 rounded-full" /> Logout
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
 
 const post = {
   id: 1,
@@ -50,15 +16,6 @@ const PostView = () => {
 
   return (
     <div className="flex flex-col h-screen bg-[#F4F4F4]">
-      {/* Navbar */}
-      <nav className="w-full flex justify-between items-center p-4">
-        <div className="flex items-center">
-          <Image src={logodark} alt="Logo" className="h-16 w-16" />
-        </div>
-        <div className="flex items-center">
-          <MyDropdownMenu />
-        </div>
-      </nav>
 
       {/* Post Content */}
       <div className="container w-3/4 mx-auto p-8 flex-grow">

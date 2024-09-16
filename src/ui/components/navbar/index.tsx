@@ -42,7 +42,7 @@ const MyDropdownMenu = () => {
 
 const Navbar = () => {
   return (
-    <div className='flex flex-col h-screen p-0 m-0'>
+    <div className='flex flex-col p-0 m-0'>
       <nav className="w-full flex justify-between items-center p-1">
         <div className="flex items-center">
           <a href="#">

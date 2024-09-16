@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { LogOut, Menu, MoveLeft } from 'lucide-react';
+import { LogIn, LogOut, Menu, MoveLeft } from 'lucide-react';
 import logodark from '@/assets/logo-dark.png';
 import Image from 'next/image';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
@@ -30,7 +30,10 @@ const MyDropdownMenu = () => {
         <DropdownMenuItem>Option 3</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut color="#1E1E1E" className="p-1 rounded-full" /> Logout
+          <a href="/login">
+            {/* <LogOut color="#1E1E1E" className="p-1 rounded-full" /> */}
+            LogIn/LogOut
+          </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

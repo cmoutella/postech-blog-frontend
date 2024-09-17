@@ -5,10 +5,12 @@ export const getAllPosts: () => Promise<
   PostInterface[] | undefined
 > = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
+  console.log("teste1", baseUrl);
   if (!baseUrl) return undefined;
 
   const postsUrl = `${baseUrl}/posts`;
+
+  console.log("teste2");
 
   try {
     const auth = await fetch(postsUrl, {

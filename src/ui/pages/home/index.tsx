@@ -2,6 +2,7 @@
 
 import { getAllPosts } from "@/features/posts/getAll";
 import { PostInterface } from "@/types";
+import AdmButtons from "@/ui/components/admButtons";
 import Navbar from "@/ui/components/navbar";
 import PostPreview from "@/ui/components/postPreview";
 import SearchBar from "@/ui/components/search";
@@ -25,9 +26,9 @@ const BlogPublicView = () => {
   return (
     <div className="p-4 flex flex-col">
       <Navbar/>
+      <AdmButtons/>
       <SearchBar/>
-      <div className="container mx-auto p-4 flex-col">
-      <p>teste</p>
+      <div className="container mt-14 flex items-center mx-auto p-4 flex-col">
       {posts.map((post) => (
         <PostPreview post={post} key={post.id} />
       ))}

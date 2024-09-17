@@ -11,8 +11,7 @@ const post = {
 };
 
 const PostView = () => {
-    //linha abaixo comentada para fazer testes sem precisar acessar os dados do banco
-  // const router = useRouter();
+  const router = useRouter();
 
   return (
     <div className="flex flex-col h-screen bg-[#F4F4F4]">

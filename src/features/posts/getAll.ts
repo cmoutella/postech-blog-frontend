@@ -5,15 +5,12 @@ export const getAllPosts: () => Promise<
   PostInterface[] | undefined
 > = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  console.log("teste1", baseUrl);
   if (!baseUrl) return undefined;
 
   const postsUrl = `${baseUrl}/posts`;
 
-  console.log("teste2");
-
   try {
-    const auth = await fetch(postsUrl, {
+    const posts = await fetch(postsUrl, {
       method: "GET",
       mode: "cors",
       headers: {
@@ -21,11 +18,11 @@ export const getAllPosts: () => Promise<
       },
     }).then((res) => res.json());
 
-    if (auth.error) {
+    if (posts.error) {
       throw Error("Não foi possivel encontrar posts");
     }
 
-    const { data } = auth as SuccessResponse<PostInterface[]>;
+    const { data } = posts as SuccessResponse<PostInterface[]>;
 
     return data;
   } catch (err) {

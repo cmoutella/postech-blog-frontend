@@ -22,6 +22,7 @@ export default function RootLayout({
       <body className={`w-screen h-screen ${GeistSans.className} bg-gray-100`}>
         <div className="w-full">
           <AllProviders>
+            <Navbar />
             <div className="w-full">{children}</div>
           </AllProviders>
         </div>

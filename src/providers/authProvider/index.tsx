@@ -51,7 +51,7 @@ export const SessionProvider = ({
 
     await handleUserResponse(auth).then((res) => {
       setUser(res);
-      router.push("/");
+      router.push("/admin");
     });
   };
 

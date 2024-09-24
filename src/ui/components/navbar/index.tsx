@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { LogIn, LogOut, Menu, MoveLeft } from 'lucide-react';
-import logodark from '@/assets/logo-dark.png';
-import Image from 'next/image';
-import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { LogIn, LogOut, Menu, MoveLeft } from "lucide-react";
+import logodark from "@/assets/logo-dark.png";
+import Image from "next/image";
+import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const MyDropdownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +25,11 @@ const MyDropdownMenu = () => {
     <DropdownMenu onOpenChange={handleToggle}>
       <DropdownMenuTrigger>
         <Menu
-        size={35}
+          size={35}
           strokeWidth={3}
-          className={`text-zinc-900 transition-transform duration-500 focus:outline-none focus:ring-0 ${isOpen ? 'rotate-180' : 'rotate-0'} mr-7`}
+          className={`text-zinc-900 transition-transform duration-500 focus:outline-none focus:ring-0 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          } mr-7`}
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -42,11 +50,15 @@ const MyDropdownMenu = () => {
 
 const Navbar = () => {
   return (
-    <div className='flex flex-col p-0 m-0'>
+    <div className="flex flex-col p-0 m-0 bg-fiap bg-opacity-30">
       <nav className="w-full flex justify-between items-center p-1">
         <div className="flex items-center">
-          <a href="#">
-            <Image src={logodark} alt="Logo" className="h-16 w-16 mt-3" />
+          <a href="/">
+            <Image
+              src={logodark}
+              alt="Logo"
+              className="h-16 w-16 mt-2 translate-y-3"
+            />
           </a>
         </div>
         <div className="flex items-center">

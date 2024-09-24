@@ -11,7 +11,7 @@ export default function AdmButtons() {
       <div className="flex gap-4">
         <Button className="bg-zinc-800 text-white">Editar meus dados</Button>
         <Button className="bg-fiap text-white">
-            <a href="/create">Novo Post</a>
+            <a href="/admin/post/create">Novo Post</a>
         </Button>
       </div>
     </header>

@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button"; 
+import { useSessionContext } from "@/providers/AuthProvider";
 
 export default function AdmButtons() {
+  const { user } = useSessionContext();
   return (
     <header className="flex justify-between items-center p-4 m-5">
       <div>
-        <span className="text-xl font-semibold">Olá Prof. Fulanito</span>
+        <span className="text-xl font-semibold">Olá Prof. {user?.username}</span>
       </div>
       <div className="flex gap-4">
         <Button className="bg-zinc-800 text-white">Editar meus dados</Button>

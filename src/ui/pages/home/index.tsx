@@ -2,8 +2,6 @@
 
 import { getAllPosts } from "@/features/posts/getAll";
 import { PostInterface } from "@/types";
-import AdmButtons from "@/ui/components/admButtons";
-import Navbar from "@/ui/components/navbar";
 import PostPreview from "@/ui/components/postPreview";
 import SearchBar from "@/ui/components/search";
 import { useEffect, useState } from "react";

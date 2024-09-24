@@ -16,7 +16,9 @@ export interface Post {
 export interface PostInterface {
   id: string;
   title: string;
-  author: string;
-  date: string;
+  teacherId: string;
+  authorName: string;
+  createdAt: string;
   text: string;
+  keywords: string[];
 }

@@ -19,42 +19,6 @@ import {
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
 import { PostInterface } from "@/types";
-
-const posts = [
-  {
-    id: 1,
-    title: "Condicional em tudo é mesmo o caminho certo?",
-    author: "Prof. John Doe",
-    date: "22 de maio de 2024",
-    content:
-      "This is a minimalistic blog post content. It is short and simple. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc.",
-  },
-  {
-    id: 2,
-    title: "Sobre algorítmos e outras lógicas",
-    author: "Prof. Jane Doe",
-    date: "22 de maio de 2024",
-    content:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc.",
-  },
-  {
-    id: 3,
-    title: "Sobre algorítmos e outras lógicas",
-    author: "Prof. Jane Doe",
-    date: "22 de maio de 2024",
-    content:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. ",
-  },
-  {
-    id: 4,
-    title: "Sobre algorítmos e outras lógicas",
-    author: "Prof. Jane Doe",
-    date: "22 de maio de 2024",
-    content:
-      "lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc. lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec odio vitae nunc.",
-  },
-];
-
 interface PostPreviewAdminProps {
   post: PostInterface;
 }
@@ -63,31 +27,36 @@ const PostPreviewAdmin = ({ post }: PostPreviewAdminProps) => {
   return (
     <Card
       key={post.id}
-      className="relative flex flex-col"
+      className="mb-6 relative flex flex-col md:flex-row w-full max-w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl"
       style={{
-        height: "270px",
+        height: "auto",
+        minHeight: "300px",
         boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
       }}
     >
-      <div className="w-full p-4 flex">
-        <div className="w-1/2 pr-4">
-          <CardHeader>
-            <CardTitle className="text-3xl font-bold text-gray-800">
-              {post.title}
-            </CardTitle>
-          </CardHeader>
-        </div>
-        <div className="w-1/2">
-          <CardContent className="overflow-hidden">
-            <p className="text-zinc-900 font-normal text-sm overflow-hidden text-ellipsis">
-              {post.text}
-            </p>
-          </CardContent>
-        </div>
+      {/* Left Section */}
+      <div className="w-full md:w-1/2 p-4">
+        <CardHeader>
+          <CardTitle className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800">
+            {post.title}
+          </CardTitle>
+        </CardHeader>
       </div>
+      {/* Right Section */}
+      <div className="w-full md:w-1/2 p-4">
+        <CardContent>
+          <p
+            className="text-sm md:text-base lg:text-lg text-zinc-900 font-normal line-clamp-3"
+            style={{ display: "-webkit-box", WebkitLineClamp: 6, WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis" }}
+          >
+            {post.text}
+          </p>
+        </CardContent>
+      </div>
+      {/* Footer Section */}
       <CardFooter className="absolute bottom-0 left-0 right-0 flex justify-between items-center p-4">
         <div>
-          <p className="text-zinc-900 font-light text-xs">{post.date}</p>
+          <p className="text-zinc-900 font-light text-xs">{post.createdAt}</p>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger>
@@ -96,11 +65,20 @@ const PostPreviewAdmin = ({ post }: PostPreviewAdminProps) => {
               className="p-1 bg-zinc-900 hover:bg-zinc-500 rounded-full"
             />
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Options</DropdownMenuLabel>
+          <DropdownMenuContent className="bg-white/4">
+            <DropdownMenuLabel className="flex justify-center">Options</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button className="w-full text-left">Edit</Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button
+                className="w-full text-left"
+                onClick={() => alert("Are you sure you want to delete this post?")}
+              >
+                Delete
+              </Button>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </CardFooter>

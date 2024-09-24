@@ -5,7 +5,7 @@ import PostPreviewAdmin from "@/ui/components/postPreviewAdmin";
 
 const AdminPostsView = () => {
   return (
-    <div className="container mx-auto p-4 flex-col">
+    <div className="container mx-auto p-4 flex flex-col gap-4">
       {posts.map((post) => (
         <PostPreviewAdmin post={post} key={post.id} />
       ))}

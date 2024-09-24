@@ -25,13 +25,11 @@ const BlogPublicView = () => {
 
   return (
     <div className="p-4 flex flex-col">
-      <Navbar/>
-      <AdmButtons/>
-      <SearchBar/>
-      <div className="container mt-14 flex items-center mx-auto p-4 flex-col">
-      {posts.map((post) => (
-        <PostPreview post={post} key={post.id} />
-      ))}
+      <SearchBar />
+      <div className="container mt-14 flex items-center mx-auto p-4 flex-col gap-4">
+        {posts.map((post) => (
+          <PostPreview post={post} key={post.id} />
+        ))}
       </div>
     </div>
   );

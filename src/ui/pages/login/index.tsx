@@ -30,11 +30,11 @@ const LoginView = () => {
   };
 
   const EyeButton = () => {
-    const eye = passwordVisible ? <EyeOff /> : <Eye />;
+    const eye = passwordVisible ? <Eye /> : <EyeOff />;
 
     return (
       <span
-        className="cursor-pointer text-slate-600 hover:text-slate-700"
+        className="cursor-pointer text-zinc-400 hover:text-slate-700"
         onClick={() => setPasswordVisible(!passwordVisible)}
       >
         {eye}
@@ -62,7 +62,7 @@ const LoginView = () => {
       {/* Metade com a caixa de login */}
       <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-10">
         <div className="p-8 w-full max-w-md">
-          <p className="text-4xl text-[#5DBAB2] mb-5 font-normal">
+          <p className="text-4xl text-zinc-600 mb-5 font-medium">
             Get started
           </p>
           <div className="flex flex-col items-center gap-4 w-full">
@@ -85,14 +85,14 @@ const LoginView = () => {
             />
 
             <button
-              className="bg-[#5DBAB2] px-4 py-2 rounded-md text-sm mt-4 self-end text-white"
+              className="bg-zinc-950 hover:bg-zinc-600 px-4 py-2 rounded-md text-sm mt-4 self-end text-white"
               disabled={!password && !username}
               onClick={handleSubmit}
             >
               Entrar
             </button>
 
-            <a href="#" className="text-[#5dbab2] underline text-sm font-mono">
+            <a href="#" className="text-fiap hover:text-fiap-dark underline text-sm font-medium">
               Sou aluno
             </a>
           </div>

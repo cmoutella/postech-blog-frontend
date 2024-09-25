@@ -8,6 +8,7 @@ import storage from "@/services/storage";
 import { getUserFn, handleUserResponse } from "@/services/auth";
 import { authLogin } from "@/features/auth/login";
 import { isTokenValid } from "@/utils/auth";
+import { showToast } from "@/ui/components/toast";
 
 interface SessionContext {
   user?: SessionTeacher;
@@ -72,10 +73,11 @@ export const SessionProvider = ({
         setUser(user);
       })
       .catch((error) => {
-        // showToast({
-        //   type: "error",
-        //   message: "Não foi possivel realizar o login tente mais tarde",
-        // });
+        console.log(error);
+        showToast({
+          type: "error",
+          message: "Não foi possivel realizar o login tente mais tarde",
+        });
         setTimeout(() => {
           router.push("/login");
         }, 3000);

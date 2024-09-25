@@ -50,7 +50,7 @@ const MyDropdownMenu = () => {
 
 const Navbar = () => {
   return (
-    <div className="flex flex-col p-0 m-0 bg-fiap bg-opacity-30">
+    <div className="flex flex-col p-0 m-0 bg-slate-900 bg-opacity-50">
       <nav className="w-full flex justify-between items-center p-1">
         <div className="flex items-center">
           <a href="/">

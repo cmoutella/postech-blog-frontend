@@ -53,10 +53,10 @@ const PostPreview = ({ post }: PostPreviewProps) => {
       {/* Footer Section */}
       <CardFooter className="absolute bottom-0 left-0 right-0 flex flex-col md:flex-row justify-between items-start md:items-center p-4">
         <div className="mb-4 md:mb-0">
-          <p className="text-sm text-zinc-950 font-normal">{post.author}</p>
-          <p className="text-xs text-zinc-900 font-light">{post.date}</p>
+          <p className="text-sm text-zinc-950 font-normal">{post.authorName}</p>
+          <p className="text-xs text-zinc-900 font-light">{post.createdAt}</p>
         </div>
-        <Button variant="link" className="text-fiap">
+        <Button variant="default">
           <a href="#">Ver post completo</a>
         </Button>
       </CardFooter>

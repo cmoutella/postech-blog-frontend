@@ -2,7 +2,7 @@
 "use client";
 import { useSessionContext } from "@/providers/AuthProvider";
 import Input from "@/ui/components/base/input";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Image from "next/image"; // Importa o componente Image do Next.js
 import { Eye, EyeOff } from "lucide-react";
 import logo from "@/assets/logo.png";

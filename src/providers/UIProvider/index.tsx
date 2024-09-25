@@ -1,8 +1,7 @@
 "use client";
 import { createContext, useContext, useState } from "react";
-import "react-toastify/dist/ReactToastify.min.css";
-import { ToastContainer } from "react-toastify";
 import { Loading } from "@/ui/components/loading";
+import { Toaster } from "react-hot-toast";
 
 type InterfaceAction = () => void;
 
@@ -55,12 +54,7 @@ export const UIProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <UIContext.Provider value={value}>
-      <ToastContainer
-        containerId="notification-column"
-        autoClose={5000}
-        newestOnTop={true}
-        limit={5}
-      />
+      <Toaster position="top-right" key="notification-bar" />
       <Loading />
       {children}
     </UIContext.Provider>

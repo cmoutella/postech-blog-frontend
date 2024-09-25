@@ -12,8 +12,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
@@ -21,9 +19,10 @@ import { Ellipsis } from "lucide-react";
 import { PostInterface } from "@/types";
 interface PostPreviewAdminProps {
   post: PostInterface;
+  deletePost: (id: string, title: string) => void;
 }
 
-const PostPreviewAdmin = ({ post }: PostPreviewAdminProps) => {
+const PostPreviewAdmin = ({ post, deletePost }: PostPreviewAdminProps) => {
   return (
     <Card
       key={post.id}
@@ -70,20 +69,17 @@ const PostPreviewAdmin = ({ post }: PostPreviewAdminProps) => {
               className="p-1 bg-zinc-900 hover:bg-zinc-500 rounded-full"
             />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-white/4">
-            <DropdownMenuLabel className="flex justify-center">
-              Options
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+          <DropdownMenuContent className="bg-white">
             <DropdownMenuItem>
-              <Button className="w-full text-left">Edit</Button>
+              <Button className="w-full" variant="secondary">
+                Edit
+              </Button>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Button
-                className="w-full text-left"
-                onClick={() =>
-                  alert("Are you sure you want to delete this post?")
-                }
+                className="w-full"
+                variant="destructive"
+                onClick={() => deletePost(post.id, post.title)}
               >
                 Delete
               </Button>

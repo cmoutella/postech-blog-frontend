@@ -47,10 +47,15 @@ const PostPreviewAdmin = ({ post }: PostPreviewAdminProps) => {
         <CardContent>
           <p
             className="text-sm md:text-base lg:text-lg text-zinc-900 font-normal line-clamp-3"
-            style={{ display: "-webkit-box", WebkitLineClamp: 6, WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis" }}
-          >
-            {post.text}
-          </p>
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 6,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            dangerouslySetInnerHTML={{ __html: post.text }}
+          />
         </CardContent>
       </div>
       {/* Footer Section */}
@@ -66,7 +71,9 @@ const PostPreviewAdmin = ({ post }: PostPreviewAdminProps) => {
             />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-white/4">
-            <DropdownMenuLabel className="flex justify-center">Options</DropdownMenuLabel>
+            <DropdownMenuLabel className="flex justify-center">
+              Options
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Button className="w-full text-left">Edit</Button>
@@ -74,7 +81,9 @@ const PostPreviewAdmin = ({ post }: PostPreviewAdminProps) => {
             <DropdownMenuItem>
               <Button
                 className="w-full text-left"
-                onClick={() => alert("Are you sure you want to delete this post?")}
+                onClick={() =>
+                  alert("Are you sure you want to delete this post?")
+                }
               >
                 Delete
               </Button>

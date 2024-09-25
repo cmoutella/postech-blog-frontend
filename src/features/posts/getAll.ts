@@ -1,13 +1,14 @@
 import { SuccessResponse } from "@/types/apiPatterns";
 import { PostInterface } from "@/types";
 
-export const getAllPosts: () => Promise<
-  PostInterface[] | undefined
-> = async () => {
+export const getAllPosts: (
+  page?: number,
+  limit?: number
+) => Promise<PostInterface[] | undefined> = async (page = 1, limit = 6) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   if (!baseUrl) return undefined;
 
-  const postsUrl = `${baseUrl}/posts`;
+  const postsUrl = `${baseUrl}/posts?page=${page}&limit=${limit}`;
 
   try {
     const posts = await fetch(postsUrl, {

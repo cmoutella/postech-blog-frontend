@@ -13,34 +13,24 @@ export const getAllPostsAdminView: (
   limit = 6
 ) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  if (!baseUrl) return undefined;
+  if (!baseUrl) {
+    throw new Error("Ops! O servidor não está disponível.");
+  }
 
   const postsUrl = `${baseUrl}/posts/admin/${teacherId}?page=${page}&limit=${limit}`;
 
   const cookie = storage.getToken();
 
-  if (!cookie || !cookie.token || !isTokenValid(cookie.expireAt))
-    return undefined;
-
-  try {
-    const posts = await fetch(postsUrl, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${cookie.token}`,
-      },
-    }).then((res) => res.json());
-
-    if (posts.error) {
-      throw Error("Não foi possivel encontrar posts");
-    }
-
-    const { data } = posts as SuccessResponse<PostInterface[]>;
-
-    return data;
-  } catch (err) {
-    console.log(err);
-    return undefined;
+  if (!cookie || !cookie.token || !isTokenValid(cookie.expireAt)) {
+    throw new Error("Sua autenticação expirou, faça login novamente.");
   }
+
+  return await fetch(postsUrl, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${cookie.token}`,
+    },
+  }).then((res) => res.json());
 };

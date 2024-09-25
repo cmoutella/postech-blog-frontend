@@ -7,6 +7,7 @@ import { useSessionContext } from "@/providers/AuthProvider";
 import { PostInterface } from "@/types";
 import { Modal } from "@/ui/components/modal";
 import PostPreviewAdmin from "@/ui/components/postPreviewAdmin";
+import { showToast } from "@/ui/components/toast";
 import { useEffect, useState } from "react";
 
 type ExcludingPost = {
@@ -22,11 +23,22 @@ const AdminPostsView = () => {
   const { user } = useSessionContext();
 
   const initPosts = async () => {
-    if (user?.id) {
+    if (!user || !user.id) return;
+
+    try {
       const allPosts = await getAllPostsAdminView(user.id);
-      if (!allPosts) return;
+
+      if (!allPosts) {
+        throw new Error("Não foi possível buscar os posts no momento");
+      }
 
       setPosts(allPosts);
+    } catch (err) {
+      console.log(err);
+      showToast({
+        type: "error",
+        message: "Não foi possivel realizar o login tente mais tarde",
+      });
     }
   };
 
@@ -37,11 +49,25 @@ const AdminPostsView = () => {
   const confirmExcludePost = async () => {
     if (!excludingPost) return;
 
-    console.log("excluir");
+    try {
+      const res = await deletePost(excludingPost.id);
 
-    const deleted = await deletePost(excludingPost.id);
+      if (res.status >= 400) {
+        throw new Error("Não foi possível deletar o post.");
+      }
 
-    if (deleted) {
+      showToast({
+        type: "success",
+        message: "Post deletado com sucesso",
+      });
+      setExcludingPost(undefined);
+      await initPosts();
+    } catch (err) {
+      console.log(err);
+      showToast({
+        type: "error",
+        message: "Não foi possivel deletar o post.",
+      });
       setExcludingPost(undefined);
     }
   };
@@ -54,13 +80,15 @@ const AdminPostsView = () => {
   return (
     <>
       <div className="container mx-auto p-4 flex flex-col gap-4">
-        {posts.map((post) => (
-          <PostPreviewAdmin
-            post={post}
-            key={post.id}
-            deletePost={excludePost}
-          />
-        ))}
+        {posts &&
+          posts.length >= 1 &&
+          posts.map((post) => (
+            <PostPreviewAdmin
+              post={post}
+              key={post.id}
+              deletePost={excludePost}
+            />
+          ))}
       </div>
       {excludingPost && excludingPost.id && (
         <Modal

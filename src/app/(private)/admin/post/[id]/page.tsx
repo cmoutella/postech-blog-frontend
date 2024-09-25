@@ -1,11 +1,11 @@
-import { Post } from "@/types";
+import { PostInterface } from "@/types";
 
 const postEndpoint = "";
 
 export async function generateStaticParams() {
   const posts = await fetch(postEndpoint).then((res) => res.json());
 
-  return posts.map((post: Post) => ({
+  return posts.map((post: PostInterface) => ({
     id: post.id,
   }));
 }

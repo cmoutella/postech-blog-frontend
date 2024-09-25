@@ -5,20 +5,21 @@ export interface Teacher {
 
 export type SessionTeacher = Teacher | Partial<Teacher> | undefined;
 
-export interface Post {
-  id: string;
+export interface CreatePostInterface {
   text: string;
-  teacher: Teacher;
-  createdAt: Date;
-  updatedAt?: Date;
+  teacherId: string;
+  title: string;
+  keywords: string[];
 }
 
+// versão atual retornada pelo backend @24Sept
 export interface PostInterface {
   id: string;
   title: string;
   teacherId: string;
   authorName: string;
   createdAt: string;
+  updatedAt?: string;
   text: string;
   keywords: string[];
 }

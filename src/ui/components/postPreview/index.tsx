@@ -39,10 +39,15 @@ const PostPreview = ({ post }: PostPreviewProps) => {
         <CardContent>
           <p
             className="text-sm md:text-base lg:text-lg text-zinc-900 font-normal line-clamp-3"
-            style={{ display: "-webkit-box", WebkitLineClamp: 6, WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis" }}
-          >
-            {post.text}
-          </p>
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 6,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            dangerouslySetInnerHTML={{ __html: post.text }}
+          />
         </CardContent>
       </div>
       {/* Footer Section */}

@@ -4,12 +4,18 @@ import storage from "@/services/storage";
 import { isTokenValid } from "@/utils/auth";
 
 export const getAllPostsAdminView: (
-  teacherId: string
-) => Promise<PostInterface[] | undefined> = async (teacherId) => {
+  teacherId: string,
+  page?: number,
+  limit?: number
+) => Promise<PostInterface[] | undefined> = async (
+  teacherId,
+  page = 1,
+  limit = 6
+) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   if (!baseUrl) return undefined;
 
-  const postsUrl = `${baseUrl}/posts/admin`;
+  const postsUrl = `${baseUrl}/posts/admin/${teacherId}?page=${page}&limit=${limit}`;
 
   const cookie = storage.getToken();
 
@@ -18,15 +24,12 @@ export const getAllPostsAdminView: (
 
   try {
     const posts = await fetch(postsUrl, {
-      method: "POST",
+      method: "GET",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${cookie.token}`,
       },
-      body: JSON.stringify({
-        teacherId: teacherId,
-      }),
     }).then((res) => res.json());
 
     if (posts.error) {

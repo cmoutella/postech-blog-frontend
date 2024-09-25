@@ -62,7 +62,7 @@ export const SessionProvider = ({
 
   const authenticate = (auth: TeacherAuth) => {
     if (user) return;
-    if (isTokenValid(auth.expireAt)) {
+    if (auth && auth.expireAt && isTokenValid(auth.expireAt)) {
       setUser(auth.user);
       return;
     }

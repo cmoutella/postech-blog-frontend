@@ -1,7 +1,7 @@
 "use client";
 
 import { getAllPosts } from "@/features/posts/getAll";
-import { PostInterface } from "@/types";
+import { PostInterface, InterfaceList } from "@/types";
 import Pagination from "@/ui/components/pagination";
 import BlankState from "@/ui/components/blankState";
 import PostPreview from "@/ui/components/postPreview";
@@ -10,18 +10,24 @@ import { useEffect, useState } from "react";
 
 const BlogPublicView = () => {
   const [posts, setPosts] = useState<PostInterface[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
+  const [totalPosts, setTotalPosts] = useState(10); // Definindo um valor padrão
+  
+  const fetchPosts = async (page: number) => {
+    const allPosts = await getAllPosts(page, itemsPerPage);
 
-  const iniciatePosts = async () => {
-    const allPosts = await getAllPosts();
-
-    if (!allPosts) return;
-
-    setPosts(allPosts);
+    if (allPosts && Array.isArray(allPosts)) {
+      setPosts(allPosts);
+      // setTotalPosts();
+    }
   };
 
   useEffect(() => {
-    iniciatePosts();
-  }, []);
+    fetchPosts(currentPage);
+  }, [currentPage]);
+
+  const totalPages = Math.ceil(totalPosts / itemsPerPage);
 
   return (
     <div className="p-4 pt-10 pb-16 flex flex-col">
@@ -33,7 +39,11 @@ const BlogPublicView = () => {
         ))}
       </div>
       <div>
-        <Pagination />
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+        />
       </div>
     </div>
   );

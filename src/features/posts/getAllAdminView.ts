@@ -1,4 +1,4 @@
-import { SuccessResponse } from "@/types/apiPatterns";
+import { InterfaceList, SuccessResponse } from "@/types/apiPatterns";
 import { PostInterface } from "@/types";
 import storage from "@/services/storage";
 import { isTokenValid } from "@/utils/auth";
@@ -7,7 +7,7 @@ export const getAllPostsAdminView: (
   teacherId: string,
   page?: number,
   limit?: number
-) => Promise<PostInterface[] | undefined> = async (
+) => Promise<SuccessResponse<InterfaceList<PostInterface>>> = async (
   teacherId,
   page = 1,
   limit = 6

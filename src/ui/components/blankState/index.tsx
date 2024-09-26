@@ -1,7 +1,13 @@
 import noResultsImage from "@/assets/no-results.png";
 import Image from "next/image";
 
-export default function BlankState() {
+type BlankStateProps = {
+  message?: string;
+};
+
+export default function BlankState({
+  message = "Nenhum post foi encontrado",
+}: BlankStateProps) {
   return (
     <div className="container flex justify-center">
       <div className="flex justify-between items-center mb-8">
@@ -14,9 +20,7 @@ export default function BlankState() {
         />
       </div>
       <div className="flex justify-between items-center mb-8">
-        <p className="text-zinc-600 text-xl font-medium">
-          Nenhum Post Foi Encontrado
-        </p>
+        <p className="text-zinc-600 text-xl font-medium">{message}</p>
       </div>
     </div>
   );

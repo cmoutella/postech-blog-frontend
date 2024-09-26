@@ -1,15 +1,5 @@
-import { PostInterface } from "@/types";
+import PostView from "@/ui/pages/post-view";
 
-const postEndpoint = "";
-
-export async function generateStaticParams() {
-  const posts = await fetch(postEndpoint).then((res) => res.json());
-
-  return posts.map((post: PostInterface) => ({
-    id: post.id,
-  }));
+export default function Page({ params }: { params: { id: string } }) {
+  return <PostView postId={params.id} />;
 }
-
-// Essa página deverá apresentar o conteúdo de um post
-
-// Podemos incluir no layout da navbar uma possibilidade de navegar para a edição, visivel apenas para usuários logados

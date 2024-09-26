@@ -17,6 +17,8 @@ import {
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
 import { PostInterface } from "@/types";
+import { formatDate } from "@/utils/date";
+
 interface PostPreviewAdminProps {
   post: PostInterface;
   deletePost: (id: string, title: string) => void;
@@ -60,7 +62,9 @@ const PostPreviewAdmin = ({ post, deletePost }: PostPreviewAdminProps) => {
       {/* Footer Section */}
       <CardFooter className="absolute bottom-0 left-0 right-0 flex justify-between items-center p-4">
         <div>
-          <p className="text-zinc-900 font-light text-xs">{post.createdAt}</p>
+          <p className="text-zinc-900 font-light text-xs">
+            {formatDate(post.createdAt)}
+          </p>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger>

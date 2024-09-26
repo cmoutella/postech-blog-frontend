@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function BlankState() {
   return (
-    <>
+    <div className="container flex justify-center">
       <div className="flex justify-between items-center mb-8">
         <Image
           src={noResultsImage}
@@ -18,8 +18,6 @@ export default function BlankState() {
           Nenhum Post Foi Encontrado
         </p>
       </div>
-    </>
+    </div>
   );
 }
-
-  

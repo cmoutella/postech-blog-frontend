@@ -10,15 +10,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PostInterface } from "@/types";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { formatDate } from "@/utils/date";
 
 interface PostPreviewProps {
   post: PostInterface;
 }
 
 const PostPreview = ({ post }: PostPreviewProps) => {
-  const formattedDate = format(new Date(post.createdAt), "dd 'de' MMMM 'de' yyyy", {locale: ptBR})
   return (
     <Card
       key={post.id}
@@ -57,10 +55,12 @@ const PostPreview = ({ post }: PostPreviewProps) => {
       <CardFooter className="absolute bottom-0 left-0 right-0 flex flex-col md:flex-row justify-between items-start md:items-center p-4">
         <div className="mb-4 md:mb-0">
           <p className="text-sm text-zinc-950 font-normal">{post.authorName}</p>
-          <p className="text-xs text-zinc-900 font-light">{formattedDate}</p>
+          <p className="text-xs text-zinc-900 font-light">
+            {formatDate(post.createdAt)}
+          </p>
         </div>
         <Button variant="default">
-          <a href="#">Ver post completo</a>
+          <a href={`/post/${post.id}`}>Ver post completo</a>
         </Button>
       </CardFooter>
     </Card>

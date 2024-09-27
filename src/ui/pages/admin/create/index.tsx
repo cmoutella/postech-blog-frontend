@@ -6,10 +6,10 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useSessionContext } from '@/providers/AuthProvider';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
 import storage from '@/services/storage';
-import { getAllPostsAdminView } from "@/features/posts/getAllAdminView";
 import { CreatePostInterface } from '@/types';
+import { showToast } from '@/ui/components/toast';
+import { createPost } from '@/features/posts/create';
 
 
 
@@ -18,52 +18,59 @@ const CreatePostView: React.FC = () => {
     const [title, setTitle] = useState('');
     const [keywords, setKeywords] = useState('');
     const [content, setContent] = useState('');
-    const router = useRouter();
     const {user} = useSessionContext();
     const teacherId = user?.id as string;
-    
-    const postCreated: CreatePostInterface = {
-       title: title,
-       text: content, 
-       keyWords: [keywords],
-       teacherId: teacherId,
-    } 
-    
-    const cookie = storage.getToken();
-    
+    const router = useRouter();
+
+     // Função de Validação
+  const isFormValid = (): boolean => {
+    // Verificar se todos os campos estão preenchidos
+    if (!title.trim() || !content.trim() || keywords.length === 0 || !teacherId.trim()) {
+      return false;
+    }
+    return true;
+  };
+ 
+ 
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const res = await fetch('http://localhost:8080/posts', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${cookie.token}`,
-              },
-              body: JSON.stringify(postCreated),
-            
+        if (!isFormValid()) {
+            showToast({
+                type: "error",
+                message: "Preencha todos os campos"
             });
-            const data = await res.json();
-   /*    if (!res.ok) {
-        toast.error(`Erro ao registrar usuário`, {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          transition: Bounce,
-          });
-        throw new Error(data.message || 'Algo deu errado na criação de post');
-      } */
-        
+            return;
+          }
+
+          const postCreated: CreatePostInterface = {
+            title: title,
+            text: content, 
+            keyWords: [keywords],
+            teacherId: teacherId,
+         }
+
+        try {
+            const res = await createPost(postCreated);
+
+     
+            if (res.status >= 400) {
+                throw new Error("Não foi possível criar o post.");
+              }
+            showToast({
+            type: "success",
+            message: "Post criado com sucesso"
+        });
+
         // Redirecionar após a criação do post
         router.push('/admin');
-        console.log("Post criado com sucesso", data)
+        console.log("Post criado com sucesso", res)
         } catch(error){
             console.error('Error:', error);
+            showToast({
+                type: "error",
+                message: "Ocorreu um erro ao tentar criar o post. Tente novamente mais tarde."
+               });
         }
     };
     return (

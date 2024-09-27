@@ -7,22 +7,35 @@ import SearchBar from "@/ui/components/search";
 import { useEffect, useState } from "react";
 import { showToast } from "@/ui/components/toast";
 import { GenericPreviewComponent, ListPosts } from "@/ui/components/listPosts";
+import { InterfaceList, SuccessResponse } from "@/types/apiPatterns";
+import { getAllByKeyword } from "@/features/posts/searchByKeyword";
 
 const BlogPublicView = () => {
   const [pagePosts, setPagePosts] = useState<PostInterface[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPosts, setTotalPosts] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [keyword, setKeyword] = useState<string>("");
   const itemsPerPage = 2;
 
-  const fetchPosts = async (page: number) => {
+  const fetchPosts = async () => {
+    let res: SuccessResponse<InterfaceList<PostInterface>>;
     try {
       setIsLoading(true);
-      const res = await getAllPosts(page, itemsPerPage);
+
+      if (!!keyword) {
+        console.log("vou buscar com keyword", keyword);
+        res = await getAllByKeyword(keyword, currentPage, itemsPerPage);
+        console.log(res);
+      } else {
+        res = await getAllPosts(currentPage, itemsPerPage);
+      }
 
       if (!res || !res.data) {
         throw new Error("Não foi possível buscar pelos posts no momento");
       }
+
+      console.log(res);
 
       const { data, totalItems } = res.data;
 
@@ -40,12 +53,17 @@ const BlogPublicView = () => {
   };
 
   useEffect(() => {
-    fetchPosts(currentPage);
+    fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   return (
     <div className="p-4 pt-10 pb-16 flex flex-col">
-      <SearchBar />
+      <SearchBar
+        searchedValue={keyword}
+        setSearchedValue={setKeyword}
+        onSearch={fetchPosts}
+      />
       <ListPosts
         pagePosts={pagePosts}
         currentPage={currentPage}

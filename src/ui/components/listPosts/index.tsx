@@ -18,6 +18,7 @@ type ListPostsProps = {
   deletePost?: (id: string, title: string) => void;
   setCurrentPage: (n: number) => void;
   PostComponent: GenericPreviewComponent;
+  blankStateMessage: string;
 };
 
 export const ListPosts = ({
@@ -29,12 +30,15 @@ export const ListPosts = ({
   itemsPerPage,
   deletePost,
   PostComponent,
+  blankStateMessage,
 }: ListPostsProps) => {
   return (
     <>
       <div className="container mt-14 flex items-center mx-auto p-4 flex-col">
         {isLoading && <Loading />}
-        {!isLoading && (!pagePosts || pagePosts.length <= 0) && <BlankState />}
+        {!isLoading && (!pagePosts || pagePosts.length <= 0) && (
+          <BlankState message={blankStateMessage} />
+        )}
         {!isLoading &&
           pagePosts.map((post) => (
             <PostComponent
@@ -44,7 +48,7 @@ export const ListPosts = ({
             />
           ))}
       </div>
-      {totalPosts > 0 && (
+      {totalPosts >= 1 && (
         <div>
           <Pagination
             currentPage={currentPage}

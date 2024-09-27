@@ -1,16 +1,26 @@
-import { SetStateAction, useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
+import { ChangeEvent, useEffect, useState } from "react";
+import { Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export default function SearchBar() {
-  const [placeholder, setPlaceholder] = useState('');
-  const [inputValue, setInputValue] = useState('');
+type SearchBarProps = {
+  searchedValue: string;
+  setSearchedValue: (s: string) => void;
+  onSearch: () => Promise<void>;
+};
+
+export default function SearchBar({
+  searchedValue,
+  setSearchedValue,
+  onSearch,
+}: SearchBarProps) {
+  const [writtingSymbol, setWrittingSymbol] = useState("");
 
   useEffect(() => {
-    const fullText = '|';
+    const fullText = "|";
     let currentIndex = 0;
 
     const interval = setInterval(() => {
-      setPlaceholder(fullText.slice(0, currentIndex));
+      setWrittingSymbol(fullText.slice(0, currentIndex));
       currentIndex++;
 
       if (currentIndex > fullText.length) {
@@ -22,31 +32,53 @@ export default function SearchBar() {
   }, []);
 
   // Função para detectar mudanças no input
-  const handleInputChange = (e: { target: { value: SetStateAction<string>; }; }) => {
-    setInputValue(e.target.value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchedValue(e.target.value);
   };
 
   return (
     <div className="flex justify-center">
-      <div className="w-[1090px]">
-        <p className='font-bold text-zinc-400 ml-8 mb-5'>What are you looking for?</p>
-        <div className="flex items-center space-x-2 relative">
-          <Search className="text-black" />
-          <div className="relative">
-            <input
-              type="text"
-              value={inputValue} // Vinculando o valor do input ao estado
-              onChange={handleInputChange} // Detecta a mudança no input
-              className="bg-transparent text-black font-light text-lg border-none focus:outline-none"
-              style={{ caretColor: "black" }} // Mostrar o cursor quando digitar
-            />
-            {!inputValue && ( // Exibe o placeholder apenas se não houver texto no input
-              <div className="absolute inset-0 pointer-events-none flex items-center">
-                <span className="text-slate-900 font-extrabold text-xl">Sear</span>
-                <span className="text-gray-400">{placeholder}</span>
-                <span className="text-gray-300 font-bold text-xl">ch</span>
+      <div className="container flex justify-center">
+        <div className="w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl">
+          <p className="font-bold text-slate-400 ml-8 mb-5">
+            Sobre o que você quer aprender hoje?
+          </p>
+          <div className="w-full flex justify-center">
+            <div className="w-full margin-auto">
+              <div className="flex flex-col md:flex-row items-center gap-2 relative w-full">
+                <Search className="text-slate-800" />
+                <div className="relative w-3/4">
+                  <input
+                    type="text"
+                    value={searchedValue}
+                    onChange={handleInputChange}
+                    className="bg-transparent text-rose-500 font-medium text-lg border-none focus:outline-none w-full"
+                    style={{ caretColor: "black" }}
+                  />
+                  {!searchedValue && ( // Exibe o writtingSymbol apenas se não houver texto no input
+                    <div className="absolute inset-0 pointer-events-none flex items-center">
+                      <span className="text-slate-800 font-extrabold text-xl">
+                        Busc
+                      </span>
+                      <span className="text-slate-400">{writtingSymbol}</span>
+                      <span className="text-slate-300 font-bold text-xl">
+                        ar
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <Button
+                  variant="outline"
+                  className="self-end ml-auto"
+                  onClick={onSearch}
+                >
+                  Buscar
+                </Button>
               </div>
-            )}
+              <p className="pl-8 text-xs text-slate-500">
+                Busque por palavra chave
+              </p>
+            </div>
           </div>
         </div>
       </div>

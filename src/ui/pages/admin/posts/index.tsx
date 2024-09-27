@@ -6,6 +6,7 @@ import { getAllPostsAdminView } from "@/features/posts/getAllAdminView";
 import { useSessionContext } from "@/providers/AuthProvider";
 import { PostInterface } from "@/types";
 import BlankState from "@/ui/components/blankState";
+import { GenericPreviewComponent, ListPosts } from "@/ui/components/listPosts";
 import { Loading } from "@/ui/components/loading";
 import { Modal } from "@/ui/components/modal";
 import Pagination from "@/ui/components/pagination";
@@ -94,28 +95,16 @@ const AdminPostsView = () => {
   return (
     <>
       <div className="container mx-auto p-4 flex flex-col gap-4">
-        {isLoading && <Loading />}
-        {!isLoading && (!pagePosts || pagePosts.length <= 0) && <BlankState />}
-        {!isLoading &&
-          pagePosts &&
-          pagePosts.length >= 1 &&
-          pagePosts.map((post) => (
-            <PostPreviewAdmin
-              post={post}
-              key={post.id}
-              deletePost={excludePost}
-            />
-          ))}
-        {totalPosts > 0 && (
-          <div>
-            <Pagination
-              currentPage={currPage}
-              setCurrentPage={setCurrPage}
-              totalItems={totalPosts}
-              perPage={perPage}
-            />
-          </div>
-        )}
+        <ListPosts
+          pagePosts={pagePosts}
+          currentPage={currPage}
+          itemsPerPage={perPage}
+          totalPosts={totalPosts}
+          setCurrentPage={setCurrPage}
+          deletePost={excludePost}
+          isLoading={isLoading}
+          PostComponent={PostPreviewAdmin as unknown as GenericPreviewComponent}
+        />
       </div>
       {excludingPost && excludingPost.id && (
         <Modal

@@ -2,13 +2,11 @@
 
 import { getAllPosts } from "@/features/posts/getAll";
 import { PostInterface } from "@/types";
-import Pagination from "@/ui/components/pagination";
-import BlankState from "@/ui/components/blankState";
 import PostPreview from "@/ui/components/postPreview";
 import SearchBar from "@/ui/components/search";
 import { useEffect, useState } from "react";
 import { showToast } from "@/ui/components/toast";
-import { Loading } from "@/ui/components/loading";
+import { GenericPreviewComponent, ListPosts } from "@/ui/components/listPosts";
 
 const BlogPublicView = () => {
   const [pagePosts, setPagePosts] = useState<PostInterface[]>([]);
@@ -48,22 +46,15 @@ const BlogPublicView = () => {
   return (
     <div className="p-4 pt-10 pb-16 flex flex-col">
       <SearchBar />
-      <div className="container mt-14 flex items-center mx-auto p-4 flex-col">
-        {isLoading && <Loading />}
-        {!isLoading && (!pagePosts || pagePosts.length <= 0) && <BlankState />}
-        {!isLoading &&
-          pagePosts.map((post) => <PostPreview post={post} key={post.id} />)}
-      </div>
-      {totalPosts > 0 && (
-        <div>
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalItems={totalPosts}
-            perPage={itemsPerPage}
-          />
-        </div>
-      )}
+      <ListPosts
+        pagePosts={pagePosts}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        totalPosts={totalPosts}
+        setCurrentPage={setCurrentPage}
+        isLoading={isLoading}
+        PostComponent={PostPreview as unknown as GenericPreviewComponent}
+      />
     </div>
   );
 };

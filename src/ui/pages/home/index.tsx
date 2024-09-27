@@ -9,6 +9,7 @@ import { showToast } from "@/ui/components/toast";
 import { GenericPreviewComponent, ListPosts } from "@/ui/components/listPosts";
 import { InterfaceList, SuccessResponse } from "@/types/apiPatterns";
 import { getAllByKeyword } from "@/features/posts/searchByKeyword";
+import { EMPTY_MESSAGE_DEFAULT } from "@/config/constants/default";
 
 const BlogPublicView = () => {
   const [pagePosts, setPagePosts] = useState<PostInterface[]>([]);
@@ -16,6 +17,7 @@ const BlogPublicView = () => {
   const [totalPosts, setTotalPosts] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [keyword, setKeyword] = useState<string>("");
+  const [emptyMessage, setEmptyMessage] = useState(EMPTY_MESSAGE_DEFAULT);
   const itemsPerPage = 2;
 
   const fetchPosts = async () => {
@@ -24,9 +26,7 @@ const BlogPublicView = () => {
       setIsLoading(true);
 
       if (!!keyword) {
-        console.log("vou buscar com keyword", keyword);
         res = await getAllByKeyword(keyword, currentPage, itemsPerPage);
-        console.log(res);
       } else {
         res = await getAllPosts(currentPage, itemsPerPage);
       }
@@ -35,10 +35,15 @@ const BlogPublicView = () => {
         throw new Error("Não foi possível buscar pelos posts no momento");
       }
 
-      console.log(res);
-
       const { data, totalItems } = res.data;
 
+      if (!!keyword) {
+        setEmptyMessage(
+          `Não encontramos posts para a palavra chave <b class="text-rose-400">${keyword}</b>`
+        );
+      } else {
+        setEmptyMessage(EMPTY_MESSAGE_DEFAULT);
+      }
       setPagePosts(data);
       setTotalPosts(totalItems);
       setIsLoading(false);
@@ -69,6 +74,7 @@ const BlogPublicView = () => {
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
         totalPosts={totalPosts}
+        blankStateMessage={emptyMessage}
         setCurrentPage={setCurrentPage}
         isLoading={isLoading}
         PostComponent={PostPreview as unknown as GenericPreviewComponent}

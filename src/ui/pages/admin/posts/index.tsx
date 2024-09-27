@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { EMPTY_MESSAGE_DEFAULT } from "@/config/constants/default";
 import { deletePost } from "@/features/posts/delete";
 import { getAllPostsAdminView } from "@/features/posts/getAllAdminView";
 import { useSessionContext } from "@/providers/AuthProvider";
@@ -100,6 +101,7 @@ const AdminPostsView = () => {
           currentPage={currPage}
           itemsPerPage={perPage}
           totalPosts={totalPosts}
+          blankStateMessage={EMPTY_MESSAGE_DEFAULT}
           setCurrentPage={setCurrPage}
           deletePost={excludePost}
           isLoading={isLoading}

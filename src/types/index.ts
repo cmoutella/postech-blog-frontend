@@ -9,7 +9,7 @@ export interface CreatePostInterface {
   text: string;
   teacherId: string;
   title: string;
-  keywords: string[];
+  keyWords: string[];
 }
 
 // versão atual retornada pelo backend @24Sept

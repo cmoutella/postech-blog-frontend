@@ -29,7 +29,10 @@ const UpdatePostView = ({postId}: PostViewProps) => {
         const res = await getOnePosts(postId);
         const data = res.data;
 
+        const keywordsString = data.keyWords;
+
         setTitle(data.title);
+        setKeywords(keywordsString.join(' '));
         setContent(data.text);
 
       } catch(error) {
@@ -50,10 +53,13 @@ const UpdatePostView = ({postId}: PostViewProps) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        const keywordsArray = keywords.split(' ');
+          
+
           const postUpdated: CreatePostInterface = {
             title: title,
             text: content, 
-            keyWords: [keywords],
+            keyWords: keywordsArray,
             teacherId: teacherId,
          }
 
@@ -62,7 +68,7 @@ const UpdatePostView = ({postId}: PostViewProps) => {
 
      
             if (res.status >= 400) {
-                throw new Error("Não foi possível criar o post.");
+                throw new Error("Não foi possível editar o post.");
               }
             showToast({
             type: "success",

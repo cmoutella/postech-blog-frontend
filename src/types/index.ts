@@ -21,5 +21,5 @@ export interface PostInterface {
   createdAt: string;
   updatedAt?: string;
   text: string;
-  keywords: string[];
+  keyWords: string[];
 }

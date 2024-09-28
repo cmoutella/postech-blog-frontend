@@ -19,6 +19,7 @@ import { Ellipsis } from "lucide-react";
 import { PostInterface } from "@/types";
 import { formatDate } from "@/utils/date";
 
+
 interface PostPreviewAdminProps {
   post: PostInterface;
   deletePost: (id: string, title: string) => void;
@@ -74,10 +75,10 @@ const PostPreviewAdmin = ({ post, deletePost }: PostPreviewAdminProps) => {
             />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-white">
-            <DropdownMenuItem>
-              <Button className="w-full" variant="secondary">
-                Edit
-              </Button>
+            <DropdownMenuItem> 
+                <Button className="w-full" variant="secondary">
+          <a href={`/admin/post/update/${post.id}`}>Editar</a>
+        </Button>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Button

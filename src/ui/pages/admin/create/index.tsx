@@ -42,16 +42,22 @@ const CreatePostView: React.FC = () => {
             });
             return;
           }
+            
+          const keywordsArray = keywords.split(' ');
+          
 
           const postCreated: CreatePostInterface = {
             title: title,
             text: content, 
-            keyWords: [keywords],
+            keyWords: keywordsArray,
             teacherId: teacherId,
          }
 
+       
+
         try {
             const res = await createPost(postCreated);
+            console.log(postCreated)
 
      
             if (res.status >= 400) {

@@ -16,7 +16,6 @@ export function PrivateBasePage({ children }: Omit<HeaderProps, "title">) {
     <div className="antialiased">
       <Navbar />
       <main className="h-auto p-4 pt-10">
-        <AdmButtons />
         <div className="container mx-auto max-w-6xl">{children}</div>
       </main>
     </div>

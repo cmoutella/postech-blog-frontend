@@ -6,6 +6,7 @@ import { deletePost } from "@/features/posts/delete";
 import { getAllPostsAdminView } from "@/features/posts/getAllAdminView";
 import { useSessionContext } from "@/providers/AuthProvider";
 import { PostInterface } from "@/types";
+import AdmButtons from "@/ui/components/admButtons";
 import { GenericPreviewComponent, ListPosts } from "@/ui/components/listPosts";
 import { Modal } from "@/ui/components/modal";
 import PostPreviewAdmin from "@/ui/components/postPreviewAdmin";
@@ -97,6 +98,7 @@ const AdminPostsView = () => {
   return (
     <div className="w-full h-full">
       <div className="container mx-auto p-4 flex flex-col gap-4">
+        <AdmButtons />
         <ListPosts
           pagePosts={pagePosts}
           currentPage={currPage}

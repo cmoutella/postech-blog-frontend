@@ -92,7 +92,7 @@ const LoginView = () => {
               Entrar
             </button>
 
-            <a href="#" className="text-fiap hover:text-fiap-dark underline text-sm font-medium">
+            <a href="/" className="text-fiap hover:text-fiap-dark underline text-sm font-medium">
               Sou aluno
             </a>
           </div>

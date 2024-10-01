@@ -6,11 +6,9 @@ import { deletePost } from "@/features/posts/delete";
 import { getAllPostsAdminView } from "@/features/posts/getAllAdminView";
 import { useSessionContext } from "@/providers/AuthProvider";
 import { PostInterface } from "@/types";
-import BlankState from "@/ui/components/blankState";
+import AdmButtons from "@/ui/components/admButtons";
 import { GenericPreviewComponent, ListPosts } from "@/ui/components/listPosts";
-import { Loading } from "@/ui/components/loading";
 import { Modal } from "@/ui/components/modal";
-import Pagination from "@/ui/components/pagination";
 import PostPreviewAdmin from "@/ui/components/postPreviewAdmin";
 import { showToast } from "@/ui/components/toast";
 import { useEffect, useState } from "react";
@@ -61,6 +59,10 @@ const AdminPostsView = () => {
     setExcludingPost({ id: id, title: title });
   };
 
+  const cancelExclusion = () => {
+    setExcludingPost(undefined);
+  };
+
   const confirmExcludePost = async () => {
     if (!excludingPost) return;
 
@@ -94,8 +96,9 @@ const AdminPostsView = () => {
   }, [currPage]);
 
   return (
-    <>
+    <div className="w-full h-full">
       <div className="container mx-auto p-4 flex flex-col gap-4">
+        <AdmButtons />
         <ListPosts
           pagePosts={pagePosts}
           currentPage={currPage}
@@ -114,7 +117,7 @@ const AdminPostsView = () => {
           description={`Tem certeza que deseja excluir o Post ${excludingPost.title}?`}
           actions={
             <div className="w-full flex justify-end gap-3">
-              <Button onClick={confirmExcludePost} variant={"secondary"}>
+              <Button onClick={cancelExclusion} variant={"secondary"}>
                 Não
               </Button>
               <Button onClick={confirmExcludePost} variant={"destructive"}>
@@ -125,7 +128,7 @@ const AdminPostsView = () => {
           close={() => setExcludingPost(undefined)}
         />
       )}
-    </>
+    </div>
   );
 };
 

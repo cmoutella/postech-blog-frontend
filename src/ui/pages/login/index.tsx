@@ -6,11 +6,15 @@ import { useState } from "react";
 import Image from "next/image"; // Importa o componente Image do Next.js
 import { Eye, EyeOff } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const LoginView = () => {
   const [username, setUsername] = useState<string | undefined>(undefined);
   const [password, setPassword] = useState<string | undefined>(undefined);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
+
+  const router = useRouter();
 
   const { login } = useSessionContext();
 
@@ -63,7 +67,7 @@ const LoginView = () => {
       <div className="w-full md:w-1/2 flex items-center justify-center px-6 py-10">
         <div className="p-8 w-full max-w-md">
           <p className="text-4xl text-zinc-600 mb-5 font-medium">
-            Get started
+            Login para Professores
           </p>
           <div className="flex flex-col items-center gap-4 w-full">
             <Input
@@ -91,10 +95,10 @@ const LoginView = () => {
             >
               Entrar
             </button>
-
             <a href="/" className="text-fiap hover:text-fiap-dark underline text-sm font-medium">
+            <Button variant="link" onClick={() => router.push("/")}>
               Sou aluno
-            </a>
+            </Button>
           </div>
         </div>
       </div>

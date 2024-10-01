@@ -1,6 +1,6 @@
 "use client";
 
-import { useSessionContext } from "@/providers/AuthProvider";
+import { useSessionContext } from "@/providers/authProvider";
 import Link from "next/link";
 
 const SessionButton = () => {
@@ -9,7 +9,7 @@ const SessionButton = () => {
   if (user) {
     return (
       <button
-        className="rounded-md py-1 px-2 border border-white text-white text-sm"
+        className="rounded-md py-1 px-2 bg-black text-white border hover:bg-zinc-500 text-sm"
         onClick={logout}
       >
         Sair
@@ -19,7 +19,7 @@ const SessionButton = () => {
     return (
       <Link
         href={"/login"}
-        className="rounded-md py-1.5 px-2 bg-white border-slate-700 border-1 text-slate-600"
+        className="rounded-md py-1.5 px-2 bg-black text-white border hover:bg-zinc-500"
       >
         Entrar
       </Link>

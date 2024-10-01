@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-import { useSessionContext } from "@/providers/AuthProvider";
+import { useSessionContext } from "@/providers/authProvider";
 import Input from "@/ui/components/base/input";
 import { useState } from "react";
 import Image from "next/image"; // Importa o componente Image do Next.js
@@ -95,7 +95,7 @@ const LoginView = () => {
             >
               Entrar
             </button>
-
+            <a href="/" className="text-fiap hover:text-fiap-dark underline text-sm font-medium">
             <Button variant="link" onClick={() => router.push("/")}>
               Sou aluno
             </Button>

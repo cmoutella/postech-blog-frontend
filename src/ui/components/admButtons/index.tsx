@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useSessionContext } from "@/providers/AuthProvider";
+import { useSessionContext } from "@/providers/authProvider";
 
 export default function AdmButtons() {
   const { user } = useSessionContext();
@@ -11,7 +11,6 @@ export default function AdmButtons() {
         </span>
       </div>
       <div className="flex gap-4">
-        <Button variant="secondary">Editar meus dados</Button>
         <Button variant="default">
           <a href="/admin/post/create">Novo Post</a>
         </Button>

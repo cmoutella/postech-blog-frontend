@@ -59,6 +59,7 @@ export const SessionProvider = ({
   const logout = () => {
     setUser(undefined);
     storage.clearToken();
+    router.push("/login");
   };
 
   const authenticate = (auth: TeacherAuth) => {

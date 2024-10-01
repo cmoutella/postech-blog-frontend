@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-import { useSessionContext } from "@/providers/AuthProvider";
+import { useSessionContext } from "@/providers/authProvider";
 import Input from "@/ui/components/base/input";
 import { useState } from "react";
 import Image from "next/image"; // Importa o componente Image do Next.js

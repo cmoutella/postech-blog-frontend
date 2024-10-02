@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 const LoginView = () => {
   const [username, setUsername] = useState<string | undefined>(undefined);
   const [password, setPassword] = useState<string | undefined>(undefined);
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
 
   const router = useRouter();
 

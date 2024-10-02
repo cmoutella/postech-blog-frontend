@@ -59,7 +59,6 @@ export const SessionProvider = ({
   const logout = () => {
     setUser(undefined);
     storage.clearToken();
-    router.push("/login");
   };
 
   const authenticate = (auth: TeacherAuth) => {
@@ -76,7 +75,7 @@ export const SessionProvider = ({
       .catch((error) => {
         showToast({
           type: "error",
-          message: "Não foi possivel realizar o login tente mais tarde",
+          message: "Não foi possivel validar suas credenciais, faça o login",
         });
         setTimeout(() => {
           router.push("/login");

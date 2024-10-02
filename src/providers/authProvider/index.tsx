@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 import { useRouter } from "next/navigation";
 import { SessionTeacher } from "@/types";
@@ -74,7 +74,6 @@ export const SessionProvider = ({
         setUser(user);
       })
       .catch((error) => {
-        console.log(error);
         showToast({
           type: "error",
           message: "Não foi possivel realizar o login tente mais tarde",
@@ -85,7 +84,6 @@ export const SessionProvider = ({
       });
   };
 
-  // TODO: esse nao ta rolando, pq?
   const isLogged = useMemo(
     () => user !== undefined && storage.hasToken(),
     [user]

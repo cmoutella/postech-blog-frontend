@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useSessionContext } from "@/providers/authProvider";
 import SessionButton from "../sessionButton";
 
-const Navbar = () => { 
+const Navbar = () => {
   const router = useRouter();
   const { user } = useSessionContext();
 
@@ -26,8 +26,16 @@ const Navbar = () => {
         </div>
         <div className="flex items-center">
           <div className="flex flex-grow gap-2 m-6">
-            {!!user && <Button variant="secondary" onClick={() => router.push('/admin')} className="bg-black hover:bg-zinc-500">Visão do Professor</Button>}
-            <SessionButton/>
+            {!!user && (
+              <Button
+                variant="secondary"
+                onClick={() => router.push("/admin")}
+                className="bg-black hover:bg-zinc-500"
+              >
+                Visão do Professor
+              </Button>
+            )}
+            <SessionButton />
           </div>
         </div>
       </nav>

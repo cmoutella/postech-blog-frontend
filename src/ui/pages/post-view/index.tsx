@@ -33,7 +33,6 @@ export const PostView = ({ postId }: PostViewProps) => {
       setPost(data);
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
       setIsLoading(false);
       showToast({
         type: "error",

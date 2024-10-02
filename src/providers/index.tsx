@@ -2,7 +2,7 @@
 import { createContext, useContext } from "react";
 
 import { UIProvider } from "./UIProvider";
-import { SessionProvider } from "./AuthProvider";
+import { SessionProvider } from "./authProvider";
 
 interface AllContext {}
 

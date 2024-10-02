@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { EMPTY_MESSAGE_DEFAULT } from "@/config/constants/default";
 import { deletePost } from "@/features/posts/delete";
 import { getAllPostsAdminView } from "@/features/posts/getAllAdminView";
-import { useSessionContext } from "@/providers/AuthProvider";
+import { useSessionContext } from "@/providers/authProvider";
 import { PostInterface } from "@/types";
 import AdmButtons from "@/ui/components/admButtons";
 import { GenericPreviewComponent, ListPosts } from "@/ui/components/listPosts";
@@ -46,7 +46,6 @@ const AdminPostsView = () => {
       setTotalPosts(totalItems);
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
       setIsLoading(false);
       showToast({
         type: "error",
@@ -81,7 +80,6 @@ const AdminPostsView = () => {
       await initPosts(1);
       setCurrPage(1);
     } catch (err) {
-      console.log(err);
       showToast({
         type: "error",
         message: "Não foi possivel deletar o post.",

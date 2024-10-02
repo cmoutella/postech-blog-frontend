@@ -95,7 +95,6 @@ const LoginView = () => {
             >
               Entrar
             </button>
-            <a href="/" className="text-fiap hover:text-fiap-dark underline text-sm font-medium">
             <Button variant="link" onClick={() => router.push("/")}>
               Sou aluno
             </Button>

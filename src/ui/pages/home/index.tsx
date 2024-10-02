@@ -48,7 +48,6 @@ const BlogPublicView = () => {
       setTotalPosts(totalItems);
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
       setIsLoading(false);
       showToast({
         type: "error",

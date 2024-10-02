@@ -3,7 +3,7 @@ import { useState, type ReactNode, useEffect } from "react";
 
 import { redirect } from "next/navigation";
 
-import { useSessionContext } from "@/providers/AuthProvider";
+import { useSessionContext } from "@/providers/authProvider";
 import { useUIContext } from "@/providers/UIProvider";
 import { PrivateBasePage } from "@/ui/templates/PrivateBasePage";
 import { getToken } from "@/services/storage";
